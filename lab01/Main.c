@@ -46,12 +46,15 @@ int exampleMain() {
 // Writing checks inside a "main" function like this is a very laborious and
 // error-prone approach, since the checks can get mixed up with the real code,
 // we may have to throw away checks as more of our real main function gets
-// written, and the output may have to be read by a person to figure out if
-// anything went wrong or not.
+// written, we might end up spitting out lots of debugging messages during
+// normal operation, and the output may have to be read by a person to figure
+// out if anything went wrong or not.
 
 // A much better approach is to define a "test suite", separate from the real
 // code, where we can add all kinds of checks, and have them tested over and
-// over automatically.
+// over automatically. This way, we can be confident that our code is working
+// as intended, will continue to be checked in the future, and we don't need to
+// see useless debugging noise in the terminal when using our programs.
 
 // Test suites can be large and complicated, but we'll just use these little
 // macros to define and run tests. You don't need to understand them, but if you
