@@ -69,10 +69,10 @@ You will need:
       your own definitions.
 
 4. There are a few functions and test suites which have no implementation. Write
-   implementations for the functions `myAnd`, `myOr`, `myImply`, and `myXor`,
-   and come up with some test suites for them, based on the description in the
-   associated comment. You may find it easier to write the tests first based on
-   the comment, then write the function based on the tests!
+   implementations for the functions `myOr`, `myImply`, and `myXor`, and come up
+   with some test suites for them, based on the description in the associated
+   comment. You may find it easier to write the tests first based on the
+   comment, then write the function based on the tests!
 
 5. Implement a function that converts boolean value to their string
    representation. A test suite is provided.
