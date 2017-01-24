@@ -126,8 +126,8 @@ char* test_add() {
 
   // Check some edge cases
   mu_assert( "rec_add handles 0 first" ,  rec_add(0, 10) == 10);
-  mu_assert( "rec_add handles 0 second",  rec_add(0, 10) == 10);
-  mu_assert("iter_add handles 0 first" , iter_add(10, 0) == 10);
+  mu_assert( "rec_add handles 0 second",  rec_add(10, 0) == 10);
+  mu_assert("iter_add handles 0 first" , iter_add(0, 10) == 10);
   mu_assert("iter_add handles 0 second", iter_add(10, 0) == 10);
 
   // Check that some general properties hold for whole bunch of inputs
