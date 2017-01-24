@@ -66,17 +66,17 @@ int tests_run;
 
 // Here are some unit tests which demonstrate how to use the hello function, and
 // automatically check whether it's behaving as it should. The code which runs
-// the tests is at the bottom of the file.
+// the tests is at the bottom of this file.
 char* test_hello() {
   char* greeting;
   int   result;
 
   // hello produces a greeting when given a name
   greeting = hello("Bob");
-  result   = !strcmp(greeting, "Hello Bob!");  // 1 if the strings are equal
+  result   = !strcmp(greeting, "Hello Bob!"); // result = 1 for equal strings
 
   free(greeting);  // Free before asserting so it's freed even if the test fails
-  mu_assert("hello didn't greet correctly", result);  // Fails if result is 0
+  mu_assert("hello didn't greet correctly", result);  // Fails if result = 0
 
   // hello will work for any name
   greeting = hello("Jo");
@@ -99,79 +99,113 @@ char* test_hello() {
 // Now that we know how to debug with printf, and use test suites to check and
 // document our code, we can begin the exercises.
 
-// We will be writing functions which use the following boolean type, of which
-// there are two values: false and true. These values can be used with C's usual
-// operations, like "if", "while", etc. and even in our unit tests (this is
-// because they act like new names for the numbers 0 and 1)
-typedef enum { false, true } boolean;
+// Fill in the definitions of the following functions and test suites, where one
+// implementation uses an iterative algorithm and the other uses a recursive
+// algorithm.
 
-// Fill in the definitions of the following functions and test suites, using the
-// boolean values we've defined above.
+// Here is an example to get you started: adding two non-negative numbers
+// together by incrementing one and decrementing the other.
 
-// Here is a definition to get you started: myAnd should return true only if
-// both of the inputs are true.
-boolean myAnd(boolean x, boolean y) {
-  return x ? y : false;
+int  rec_add(int x, int y) {
+  return (x == 0)? y
+                 : rec_add(x-1, y+1);
 }
 
-char* test_myAnd() {
-  // Straight from the specification written above
-  mu_assert("myAnd gives true when required", myAnd(true, true));
-
-  // The specification says "only", so we should make sure the other
-  // possibilities don't return true
-  mu_assert("myAnd(false, false)", !myAnd(false, false));
-  mu_assert("myAnd(false,  true)", !myAnd(false,  true));
-  mu_assert("myAnd( true, false)", !myAnd( true, false));
-
-  return 0;
+int iter_add(int x, int y) {
+  while (x > 0) {
+    x = x-1;
+    y = y+1;
+  }
+  return y;
 }
 
-// myOr should return false only if both of the inputs are false.
-boolean myOr(boolean x, boolean y) {}
+char* test_add() {
+  // Check a few values to make sure they're added together
+  mu_assert( "rec_add should add",  rec_add(5, 7) == 12);
+  mu_assert("iter_add should add", iter_add(5, 7) == 12);
 
-// Check the behaviour of myOr using a test suite
-char* test_myOr() {
-  return "Replace this with your tests";
+  // Check some edge cases
+  mu_assert( "rec_add handles 0 first" ,  rec_add(0, 10) == 10);
+  mu_assert( "rec_add handles 0 second",  rec_add(0, 10) == 10);
+  mu_assert("iter_add handles 0 first" , iter_add(10, 0) == 10);
+  mu_assert("iter_add handles 0 second", iter_add(10, 0) == 10);
+
+  // Check that some general properties hold for whole bunch of inputs
+  for (int x = 0; x < 100; ++x) {
+    mu_assert( "rec_add left  identity",  rec_add(0, x) == x);
+    mu_assert( "rec_add right identity",  rec_add(x, 0) == x);
+    mu_assert("iter_add left  identity", iter_add(0, x) == x);
+    mu_assert("iter_add right identity", iter_add(x, 0) == x);
+    for (int y = 0; y < 100; ++y) {
+      mu_assert( "rec_add matches +",        rec_add(x, y) == x + y);
+      mu_assert( "rec_add matches iter_add", rec_add(x, y) == iter_add(x, y));
+      mu_assert( "rec_add commutative",      rec_add(x, y) ==  rec_add(y, x));
+      mu_assert("iter_add commutative",     iter_add(x, y) == iter_add(y, x));
+    }
+  }
+  return 0; // passed
 }
 
-// myImply(x, y) should return false only if x is true and y is false. For the
-// other cases it returns true.
-boolean myImply(boolean x, boolean y) {}
+// Factorial function: f(x) = x!. Be careful testing this, as the output gets
+// very big and might overflow!
 
-char* test_myImply() {
-  return "Replace this with your tests";
+int    rec_factorial(int x) {}
+
+int   iter_factorial(int x) {}
+
+char* test_factorial() {
+  return "Replace this with your factorial tests";
 }
 
-// myXor is called "exclusive disjunction" (AKA "exclusive or"). It is a logical
-// operation that outputs true whenever both inputs differ (one is true, the
-// other is false)
-boolean myXor(boolean x, boolean y) {}
+// Exponential function: f(c, n) = c^n, for any constant c.
 
-char* test_myXor() {
-  return "Replace this with your tests";
+int    rec_exponential(int x, int y) {}
+
+int   iter_exponential(int x, int y) {}
+
+char* test_exponential() {
+  return "Replace this with your exponential tests";
 }
 
-// You may have noticed that printing boolean values makes numbers appear. To
-// avoid this, define a function that converts a boolean value to its
-// corresponding string, e.g. so boolToString(true) gives "true".
-char* boolToString(boolean x) {}
+// Euclidean greatest common divisor algorithm.
 
-char* test_boolToString() {
-  mu_assert("Get string for true",  !strcmp(boolToString( true),  "true"));
-  mu_assert("Get string for false", !strcmp(boolToString(false), "false"));
-  return 0;
+int    rec_gcd(int x, int y) {}
+
+int   iter_gcd(int x, int y) {}
+
+char* test_gcd() {
+  return "Replace this with your gcd tests";
 }
 
-// Now we list all of the test suites, and define a "main" function which will
-// run them all for us.
+// Find all odd numbers from 0 to n.
+
+int    rec_odds(int x, int y) {}
+
+int   iter_odds(int x, int y) {}
+
+char* test_odds() {
+  return "Replace this with your odds tests";
+}
+
+// Compute the sum of n elements in an array a
+
+int    rec_sum(int x, int y) {}
+
+int   iter_sum(int x, int y) {}
+
+char* test_sum() {
+  return "Replace this with your sum tests";
+}
+
+// This will run all of the tests, one after another
 char* all_tests() {
-  mu_run_test(test_hello       );
-  mu_run_test(test_myAnd       );
-  mu_run_test(test_myOr        );
-  mu_run_test(test_myImply     );
-  mu_run_test(test_myXor       );
-  mu_run_test(test_boolToString);
+  mu_run_test(test_hello      );
+  mu_run_test(test_add        );
+  mu_run_test(test_factorial  );
+  mu_run_test(test_exponential);
+  mu_run_test(test_gcd        );
+  mu_run_test(test_odds       );
+  mu_run_test(test_sum        );
   return 0;
 }
 
