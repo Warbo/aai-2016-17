@@ -159,9 +159,9 @@ char* test_factorial() {
 
 // Exponential function: f(c, n) = c^n, for any constant c.
 
-int    rec_exponential(int x, int y) {}
+int    rec_exponential(int c, int n) {}
 
-int   iter_exponential(int x, int y) {}
+int   iter_exponential(int c, int n) {}
 
 char* test_exponential() {
   return "Replace this with your exponential tests";
@@ -179,9 +179,9 @@ char* test_gcd() {
 
 // Find all odd numbers from 0 to n.
 
-int    rec_odds(int x, int y) {}
+int    rec_odds(int n) {}
 
-int   iter_odds(int x, int y) {}
+int   iter_odds(int n) {}
 
 char* test_odds() {
   return "Replace this with your odds tests";
@@ -189,9 +189,9 @@ char* test_odds() {
 
 // Compute the sum of n elements in an array a
 
-int    rec_sum(int x, int y) {}
+int    rec_sum(int* a, int n) {}
 
-int   iter_sum(int x, int y) {}
+int   iter_sum(int* a, int n) {}
 
 char* test_sum() {
   return "Replace this with your sum tests";
