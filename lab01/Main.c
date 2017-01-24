@@ -73,7 +73,7 @@ char* test_hello() {
   result   = !strcmp(greeting, "Hello Bob!");  // 1 if the strings are equal
 
   free(greeting);  // Free before asserting so it's freed even if the test fails
-  mu_assert("Didn't greet 'Bob' correctly", result);  // Fails if result is 0
+  mu_assert("hello didn't greet correctly", result);  // Fails if result is 0
 
   // hello will work for any name
   greeting = hello("Jo");
@@ -87,7 +87,7 @@ char* test_hello() {
   result   = !strcmp(greeting, "Hello !");
 
   free(greeting);
-  mu_assert("Empty string failed", result);
+  mu_assert("Empty string wasn't greeted", result);
 
   // At this point, our tests have passed, which we indicate by returning 0
   return 0;
