@@ -8,7 +8,7 @@ machine (installed natively or in a virtual machine like
  - GCC, the GNU Compiler Collection
  - Git
  - A text editor, such as Emacs or Kate
- - A terminal (if you're using Emacs, it several built in)
+ - A terminal (if you're using Emacs, it has several built in)
 
 1. Obtain a copy of this repository according to the following instructions.
     - In a terminal window, clone the git repository to your local machine and
